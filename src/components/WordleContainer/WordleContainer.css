@@ -1,0 +1,31 @@
+#wordleBoxes {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.letterBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 4rem;
+    height: 5rem;
+    margin-left: 1rem;
+
+    border-radius: 5px;
+    color: hsl(0, 0%, 10%);
+    font-size: 3rem;
+}
+
+.active {
+    background-color: hsl(0, 0%, 90%);
+    
+}
+
+.inactive {
+    background-color: hsl(0, 0%, 60%);
+}
+
+.correct {
+    background-color: hsl(120, 74%, 69%);
+}
