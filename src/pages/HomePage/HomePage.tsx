@@ -75,43 +75,45 @@ const HomePage = () => {
     }
 
     return (
-        <div className="container" tabIndex={0} onKeyUp={IterateLetter}>
-            <h1>Slidle #{wordId} <IoMdRefresh className="refreshIcon" onClick={ResetBoard}/></h1>
-            <p>The word is {words[wordId].toUpperCase()}</p>
-            <div className="scoreContainer">
-                <p>Score (lower is better):&nbsp;</p>
-                <strong style={{ "width": score.toString().length + "ch" }}>{score}</strong>
-            </div>
-            <WordleContainer word={words[wordId].toUpperCase()} lettersTyped={lettersTyped}></WordleContainer>
-            {
-                hasWon &&
-                <div className="winContainer">
-                    <h2>You win!</h2>
-                    <p>Score: <strong>{score}</strong></p>
-                    <p>Letters typed: <strong>{lettersTyped.length - 10}</strong></p>
-                    <p>Elapsed time: <strong>{Math.round((endTime - startTime) / 1000)} seconds</strong></p>
-                    <button
-                        className="shareButton"
-                        onClick={(e) => {
-                            console.log(e);
-                            console.log(e.currentTarget.innerText);
-                            const button = e.currentTarget;
-                            button.innerText = "Results copied"
-                            setTimeout(() => {
-                                button.innerText = "Share results!"
-                            }, 2000)
+        <div className="fullScreen" tabIndex={0} onKeyUp={IterateLetter}>
+            <div className="container">
+                <h1>Slidle #{wordId} <IoMdRefresh className="refreshIcon" onClick={ResetBoard} /></h1>
+                {/* <p>The word is {words[wordId].toUpperCase()}</p> */}
+                <div className="scoreContainer">
+                    <p>Score (lower is better):&nbsp;</p>
+                    <strong style={{ "width": score.toString().length + "ch" }}>{score}</strong>
+                </div>
+                <WordleContainer word={words[wordId].toUpperCase()} lettersTyped={lettersTyped}></WordleContainer>
+                {
+                    hasWon &&
+                    <div className="winContainer">
+                        <h2>You win!</h2>
+                        <p>Score: <strong>{score}</strong></p>
+                        <p>Letters typed: <strong>{lettersTyped.length - 10}</strong></p>
+                        <p>Elapsed time: <strong>{Math.round((endTime - startTime) / 1000)} seconds</strong></p>
+                        <button
+                            className="shareButton"
+                            onClick={(e) => {
+                                console.log(e);
+                                console.log(e.currentTarget.innerText);
+                                const button = e.currentTarget;
+                                button.innerText = "Results copied"
+                                setTimeout(() => {
+                                    button.innerText = "Share results!"
+                                }, 2000)
 
-                            navigator.clipboard.writeText(`
+                                navigator.clipboard.writeText(`
                             Slidle Game Results!
                             Score (lower is better): ${score}
                             Letters typed: ${lettersTyped.length - 10}
                             Elapsed time: ${Math.round((endTime - startTime) / 1000)} seconds
                             Play this puzzle: ${window.location.href}
                         `)
-                        }}>Share results!</button>
-                    <p>Press any letter to play again</p>
-                </div>
-            }
+                            }}>Share results!</button>
+                        <p>Press any letter to play again</p>
+                    </div>
+                }
+            </div>
         </div>
     );
 }
