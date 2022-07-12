@@ -9,10 +9,10 @@ const HomePage = () => {
     const iterateLetter = (event: any) => {
         // checks if the key is a letter
         if(event.key.toUpperCase() !== event.key.toLowerCase()) {
-            lettersTyped.unshift(event.key.toUpperCase());
+            lettersTyped.push(event.key.toUpperCase());
             setLettersTyped([...lettersTyped]);
 
-            if (lettersTyped.slice(0, 5).reverse().join("") === word.toUpperCase()) {
+            if (lettersTyped.slice(lettersTyped.length-5, lettersTyped.length).join("") === word.toUpperCase()) {
                 setTimeout(() => {
                     alert(`You win! It took you ${lettersTyped.length - 10} guesses.`)
                     setLettersTyped(["", "", "", "", "", "", "", "", "", "",]);
