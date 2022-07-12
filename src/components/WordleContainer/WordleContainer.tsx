@@ -38,7 +38,7 @@ const WordleBoxes = ({ word, lettersTyped }: WordInfo) => {
         animateEnteringElements,
         animateExitingElements,
         animateFlippedElements
-    }:any) => {
+    }: any) => {
         hideEnteringElements();
         animateExitingElements();
         animateFlippedElements();
@@ -48,38 +48,25 @@ const WordleBoxes = ({ word, lettersTyped }: WordInfo) => {
     };
 
     return (
-        <>
-            <p>Word is {word}</p>
+        <Flipper
+            flipKey={lettersTyped.join('')}
+            className="wordleBoxes"
+            spring={springConfig}
+            handleEnterUpdateDelete={handleEnterUpdateDelete}>
             {
-                <Flipper
-                    flipKey={lettersTyped.join('')}
-                    className="wordleBoxes"
-                    spring={springConfig}
-                    handleEnterUpdateDelete={handleEnterUpdateDelete}>
-                    {
-                        lettersTyped.slice(lettersTyped.length - 10, lettersTyped.length).map((letter, index) => (
-                            <Flipped
-                                key={lettersTyped.length + index}
-                                flipId={lettersTyped.length + index}
-                                onAppear={onAppear}
-                                onExit={onExit}>
-                                <div>
-                                    <WordleLetterBoxes isActive={index >= 5 ? true : false} correctLetter={word.charAt(index - 5)} actualLetter={letter}></WordleLetterBoxes>
-                                </div>
-                            </Flipped>
-                        ))
-                    }
-                </Flipper>
-
-
+                lettersTyped.slice(lettersTyped.length - 10, lettersTyped.length).map((letter, index) => (
+                    <Flipped
+                        key={lettersTyped.length + index}
+                        flipId={lettersTyped.length + index}
+                        onAppear={onAppear}
+                        onExit={onExit}>
+                        <div>
+                            <WordleLetterBoxes isActive={index >= 5 ? true : false} correctLetter={word.charAt(index - 5)} actualLetter={letter}></WordleLetterBoxes>
+                        </div>
+                    </Flipped>
+                ))
             }
-            {/* {
-                    lettersTyped.slice(lettersTyped.length-10, lettersTyped.length-5).map((letter, index) => (
-                        <WordleLetterBoxes key={index} isActive={false} correctLetter={""} actualLetter={letter}></WordleLetterBoxes>
-                    ))
-
-                } */}
-        </>
+        </Flipper>
     );
 }
 
