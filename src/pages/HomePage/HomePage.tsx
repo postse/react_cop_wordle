@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WordleContainer from "../../components/WordleContainer/WordleContainer";
 import words from "../../data/words";
 
 const HomePage = () => {
-    const word: string = words[0].toUpperCase();
     const [lettersTyped, setLettersTyped] = useState<string[]>(["", "", "", "", "", "", "", "", "", "",]);
+    const [word, setWord] = useState(words[Math.floor(Math.random() * words.length)].toUpperCase());
 
     const iterateLetter = (event: any) => {
         // checks if the key is a letter
@@ -14,9 +14,10 @@ const HomePage = () => {
 
             if (lettersTyped.slice(lettersTyped.length-5, lettersTyped.length).join("") === word.toUpperCase()) {
                 setTimeout(() => {
-                    alert(`You win! It took you ${lettersTyped.length - 10} guesses.`)
+                    alert(`You win! It took you ${lettersTyped.length - 10} guesses.`);
                     setLettersTyped(["", "", "", "", "", "", "", "", "", "",]);
-                }, 100)
+                    setWord(words[Math.floor(Math.random() * words.length)].toUpperCase());
+                }, 200)
             }
         }
     }

@@ -50,7 +50,7 @@ const WordleBoxes = ({ word, lettersTyped }: WordInfo) => {
                                     }, 0);
                                   }}>
                                 <div>
-                                    <WordleLetterBoxes isActive={true} correctLetter={word.charAt(index - 5)} actualLetter={letter}></WordleLetterBoxes>
+                                    <WordleLetterBoxes isActive={index >= 5 ? true : false} correctLetter={word.charAt(index - 5)} actualLetter={letter}></WordleLetterBoxes>
                                 </div>
                             </Flipped>
                         ))
