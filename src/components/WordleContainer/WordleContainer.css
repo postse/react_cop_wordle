@@ -13,6 +13,7 @@
     margin-left: 1rem;
 
     border-radius: 5px;
+    box-shadow: 0 0 5px black;
     color: hsl(0, 0%, 10%);
     font-size: 3rem;
     transition: .2s ease;
@@ -20,11 +21,12 @@
 
 .active {
     background-color: hsl(0, 0%, 90%);
-
+    transition: .2s ease;
+    outline: 2px solid black;
 }
 
 .inactive {
-    background-color: hsl(0, 0%, 60%);
+    background-color: hsl(0, 0%, 50%);
     transition: .2s ease;
 }
 

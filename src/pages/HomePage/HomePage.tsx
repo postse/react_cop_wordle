@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import WordleContainer from "../../components/WordleContainer/WordleContainer";
 import words from "../../data/words";
+import './HomePage.css'
 
 const HomePage = () => {
     const [lettersTyped, setLettersTyped] = useState<string[]>(["", "", "", "", "", "", "", "", "", "",]);
@@ -39,7 +40,10 @@ const HomePage = () => {
     return (
         <div className="container" tabIndex={0} onKeyUp={event => iterateLetter(event)}>
             <h1>Wordle</h1>
-            <p>Score (lower is better): {score}</p>
+            <div className="scoreContainer">
+                <p>Score (lower is better):&nbsp;</p>
+                <strong style={{"width": score.toString().length + "ch"}}>{score}</strong>
+            </div>
             <WordleContainer word={word} lettersTyped={lettersTyped}></WordleContainer>
         </div>
     );

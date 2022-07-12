@@ -61,7 +61,12 @@ const WordleBoxes = ({ word, lettersTyped }: WordInfo) => {
                         onAppear={onAppear}
                         onExit={onExit}>
                         <div>
-                            <WordleLetterBoxes isActive={index >= 5 ? true : false} correctLetter={word.charAt(index - 5)} actualLetter={letter}></WordleLetterBoxes>
+                            <WordleLetterBoxes
+                                isActive={index >= 5 ? true : false}
+                                correctLetter={word.charAt(index - 5)}
+                                actualLetter={letter}
+                                opacity={(index + 1) * .2}
+                            />
                         </div>
                     </Flipped>
                 ))
