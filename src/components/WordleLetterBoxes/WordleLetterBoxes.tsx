@@ -1,3 +1,5 @@
+import './WordleLetterBoxes.css'
+
 interface LetterInfo {
     isActive: boolean,
     correctLetter: string,
