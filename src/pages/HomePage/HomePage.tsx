@@ -102,13 +102,7 @@ const HomePage = () => {
                                     button.innerText = "Share results!"
                                 }, 2000)
 
-                                navigator.clipboard.writeText(`
-                            Slidle Game Results!
-                            Score (lower is better): ${score}
-                            Letters typed: ${lettersTyped.length - 10}
-                            Elapsed time: ${Math.round((endTime - startTime) / 1000)} seconds
-                            Play this puzzle: ${window.location.href}
-                        `)
+                                navigator.clipboard.writeText(`Slidle Game Results!\nScore (lower is better): ${score}\nLetters typed: ${lettersTyped.length - 10}\nElapsed time: ${Math.round((endTime - startTime) / 1000)} seconds\nPlay this puzzle: ${window.location.href}`)
                             }}>Share results!</button>
                         <p>Press any letter to play again</p>
                     </div>
