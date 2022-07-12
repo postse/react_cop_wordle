@@ -1,8 +1,7 @@
 // import { AnimatedList } from 'react-animated-list';
 import WordleLetterBoxes from "../WordleLetterBoxes/WordleLetterBoxes";
 import "./WordleContainer.css"
-import { Flipper, Flipped, spring } from 'react-flip-toolkit';
-import { useRef, useEffect } from 'react';
+import { Flipper, Flipped } from 'react-flip-toolkit';
 
 interface WordInfo {
     word: string,
@@ -11,7 +10,7 @@ interface WordInfo {
 
 const WordleBoxes = ({ word, lettersTyped }: WordInfo) => {
 
-    const onAppear = (el: any) => {
+    const onAppear = (el: HTMLElement) => {
         setTimeout(() => {
             el.classList.add("fadeIn");
             setTimeout(() => {
@@ -21,7 +20,7 @@ const WordleBoxes = ({ word, lettersTyped }: WordInfo) => {
         }, 0);
     };
 
-    const onExit = (el: any, removeElement: any) => {
+    const onExit = (el: HTMLElement, index: number, removeElement: () => void) => {
         setTimeout(() => {
             el.classList.add("fadeOut");
             setTimeout(removeElement, 50);

@@ -8,15 +8,17 @@ const HomePage = () => {
     const [word, setWord] = useState<string>(words[Math.floor(Math.random() * words.length)].toUpperCase());
     const [score, setScore] = useState<number>(0);
 
+
+
     useEffect(() => {
         if (lettersTyped.length === 10) return;
-        setScore(score + 10);
+        setScore(score => score + 10);
     }, [lettersTyped]);
 
     useEffect(() => {
         const updateScoreInterval = setInterval(() => {
             setScore(score => score + 1);
-        }, 500)
+        }, 250)
         return () => clearInterval(updateScoreInterval);
     }, [])
 
@@ -28,7 +30,7 @@ const HomePage = () => {
 
             if (lettersTyped.slice(lettersTyped.length - 5, lettersTyped.length).join("") === word.toUpperCase()) {
                 setTimeout(() => {
-                    alert(`You win! It took you ${lettersTyped.length - 10} guesses.`);
+                    alert(`You win! Your score was ${score}. It took you ${lettersTyped.length - 10} guesses.`);
                     setLettersTyped(["", "", "", "", "", "", "", "", "", "",]);
                     setWord(words[Math.floor(Math.random() * words.length)].toUpperCase());
                     setScore(0);
@@ -38,8 +40,8 @@ const HomePage = () => {
     }
 
     return (
-        <div className="container" tabIndex={0} onKeyUp={event => iterateLetter(event)}>
-            <h1>Wordle</h1>
+        <div className="container" tabIndex={0} onKeyUp={iterateLetter}>
+            <h1>Slidle</h1>
             <div className="scoreContainer">
                 <p>Score (lower is better):&nbsp;</p>
                 <strong style={{"width": score.toString().length + "ch"}}>{score}</strong>
