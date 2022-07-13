@@ -16,6 +16,8 @@ const HomePage = () => {
 
     const jsConfetti = new JSConfetti();
 
+    console.log("rerendered");
+
     useEffect(() => {
         if (/^-?\d+$/.test(window.location.pathname.replace("/", ""))) {
             setWordId(Number(window.location.pathname.replace("/", "")));

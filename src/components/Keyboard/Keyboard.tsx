@@ -17,7 +17,6 @@ const Keyboard = ({ IterateLetter }: KeyboardProps) => {
         document.querySelector('[data-skbtn="{backspace}"]')?.classList.add("hidden");
         document.querySelector('[data-skbtn="{shift}"]')?.classList.add("hidden");
     }, [])
-    console.log("keyboard rerendered");
 
     return (
         <div id="keyboardContainer">
