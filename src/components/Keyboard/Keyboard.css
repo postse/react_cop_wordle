@@ -22,24 +22,25 @@
 
 .simple-keyboard.myTheme1 .hg-button {
     height: 3.5rem;
+    font-size: 1.3rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: hsl(240, 52%, 8%);
-    color: hsl(0, 0%, 90%);
+    background-color: hsl(240, 25%, 70%);
+    color: hsl(0, 0%, 10%);
 
     border: 1px solid hsl(0, 0%, 100%, .1);
     transition: .2s ease;
 }
 
 .simple-keyboard.myTheme1 .hg-button:hover {
-    background-color: hsl(240, 52%, 15%);
+    background-color: hsl(240, 25%, 60%);
 
     transition: .2s ease;
 }
 
 .simple-keyboard.myTheme1 .hg-button:active {
-    background-color: hsl(240, 52%, 20%);
+    background-color: hsl(240, 52%, 50%);
 
     transition: .2s ease;
 }
