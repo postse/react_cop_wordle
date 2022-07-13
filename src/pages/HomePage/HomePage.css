@@ -22,14 +22,6 @@ p {
     align-items: center;
 }
 
-.winContainer {
-    margin-top: 2rem;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
 .shareButton {
     cursor: pointer;
     margin: .3rem 0 1.5rem 0;

@@ -39,3 +39,10 @@
     background-color: hsl(120, 74%, 69%);
     transition: .2s ease;
 }
+
+@media only screen and (max-width: 600px) {
+    .letterBox {
+        width: 3rem;
+        height: 4rem;
+    }
+}

@@ -5,6 +5,7 @@ import JSConfetti from "js-confetti";
 import { IoMdRefresh } from 'react-icons/io'
 import './HomePage.css'
 import Keyboard from "../../components/Keyboard/Keyboard";
+import WinModal from "../../components/WinModal/WinModal";
 
 const HomePage = () => {
     const [lettersTyped, setLettersTyped] = useState<string[]>(Array(17).fill(""));
@@ -90,29 +91,30 @@ const HomePage = () => {
                 <WordleContainer word={words[wordId].toUpperCase()} lettersTyped={lettersTyped}></WordleContainer>
                 {
                     hasWon &&
-                    <div className="winContainer">
-                        <h2>You win!</h2>
-                        <p>Score: <strong>{score}</strong></p>
-                        <p>Letters typed: <strong>{lettersTyped.length - 10}</strong></p>
-                        <p>Elapsed time: <strong>{Math.round((endTime - startTime) / 1000)} seconds</strong></p>
-                        <button
-                            className="shareButton"
-                            onClick={(e) => {
-                                console.log(e);
-                                console.log(e.currentTarget.innerText);
-                                const button = e.currentTarget;
-                                button.innerText = "Results copied"
-                                setTimeout(() => {
-                                    button.innerText = "Share results!"
-                                }, 2000)
+                    <WinModal startTime={startTime} endTime={endTime} lettersTyped={lettersTyped} score={score}/>
+                    // <div className="winContainer">
+                    //     <h2>You win!</h2>
+                    //     <p>Score: <strong>{score}</strong></p>
+                    //     <p>Letters typed: <strong>{lettersTyped.length - 10}</strong></p>
+                    //     <p>Elapsed time: <strong>{Math.round((endTime - startTime) / 1000)} seconds</strong></p>
+                    //     <button
+                    //         className="shareButton"
+                    //         onClick={(e) => {
+                    //             console.log(e);
+                    //             console.log(e.currentTarget.innerText);
+                    //             const button = e.currentTarget;
+                    //             button.innerText = "Results copied"
+                    //             setTimeout(() => {
+                    //                 button.innerText = "Share results!"
+                    //             }, 2000)
 
-                                navigator.clipboard.writeText(`Slidle Game Results!\nScore (lower is better): ${score}\nLetters typed: ${lettersTyped.length - 10}\nElapsed time: ${Math.round((endTime - startTime) / 1000)} seconds\nPlay this puzzle: ${window.location.href}`)
-                            }}>Share results!</button>
-                        <p>Press any letter to play again</p>
-                    </div>
+                    //             navigator.clipboard.writeText(`Slidle Game Results!\nScore (lower is better): ${score}\nLetters typed: ${lettersTyped.length - 10}\nElapsed time: ${Math.round((endTime - startTime) / 1000)} seconds\nPlay this puzzle: ${window.location.href}`)
+                    //         }}>Share results!</button>
+                    //     <p>Press any letter to play again</p>
+                    // </div>
                 }
+                <Keyboard IterateLetter={IterateLetter} />
             </div>
-            {/* <Keyboard IterateLetter={IterateLetter} /> */}
         </div>
     );
 }
