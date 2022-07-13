@@ -53,18 +53,18 @@ const WordleBoxes = ({ word, lettersTyped }: WordInfo) => {
             spring={springConfig}
             handleEnterUpdateDelete={handleEnterUpdateDelete}>
             {
-                lettersTyped.slice(lettersTyped.length - 10, lettersTyped.length).reverse().map((letter, index) => (
+                lettersTyped.slice(lettersTyped.length - 17, lettersTyped.length).reverse().map((letter, index) => (
                     <Flipped
                         key={lettersTyped.length - index}
                         flipId={lettersTyped.length - index}
                         onAppear={onAppear}
                         onExit={onExit}>
-                        <div className={"box" + index}>
+                        <div className={"box" + (index + 1)}>
                             <WordleLetterBoxes
                                 isActive={index < 5 ? true : false}
                                 correctLetter={word.charAt(4 - index)}
                                 actualLetter={letter}
-                                opacity={(10-index) * .2}
+                                opacity={(17-index) * .05}
                             />
                         </div>
                     </Flipped>

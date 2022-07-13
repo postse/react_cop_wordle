@@ -27,13 +27,13 @@ code {
 }
 
 .container {
-  width: min(90%, 1200px);
+  /* width: min(90%, 1200px); */
 
   margin-top: 5rem;
 
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .container:focus {

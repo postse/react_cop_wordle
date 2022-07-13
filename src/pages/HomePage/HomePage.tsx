@@ -7,7 +7,7 @@ import './HomePage.css'
 import Keyboard from "../../components/Keyboard/Keyboard";
 
 const HomePage = () => {
-    const [lettersTyped, setLettersTyped] = useState<string[]>(["", "", "", "", "", "", "", "", "", "",]);
+    const [lettersTyped, setLettersTyped] = useState<string[]>(Array(17).fill(""));
     const [wordId, setWordId] = useState<number>(Math.floor(Math.random() * words.length));
     const [score, setScore] = useState<number>(0);
     const [hasWon, setHasWon] = useState<boolean>(false);
@@ -27,7 +27,7 @@ const HomePage = () => {
     }, [wordId])
 
     const ResetBoard = () => {
-        setLettersTyped(["", "", "", "", "", "", "", "", "", "",]);
+        setLettersTyped(Array(17).fill(""));
         setScore(0);
         setHasWon(false);
         const newWordId = Math.floor(Math.random() * words.length);
@@ -39,9 +39,10 @@ const HomePage = () => {
 
     const IterateLetter = (letter: string) => {
         letter = letter.toUpperCase();
+        if (letter.length > 1) return;
 
         // checks if the key is a letter
-        if ((/[a-zA-Z]/).test(letter) && letter !== "BACKSPACE" && letter !== "ENTER") {
+        if (letter.match(/^[A-Z]*$/)) {
             lettersTyped.push(letter);
             setLettersTyped([...lettersTyped]);
 
@@ -65,7 +66,7 @@ const HomePage = () => {
                 setScore(score => score + 10);
 
                 // Runs when game begins
-                if (lettersTyped.length === 11) {
+                if (lettersTyped.length === 18) {
                     setStartTime(new Date().getTime())
 
                     const updateScoreInterval = setInterval(() => {
@@ -81,7 +82,7 @@ const HomePage = () => {
         <div className="fullScreen" tabIndex={0} onKeyUp={(e) => IterateLetter(e.key.toUpperCase())}>
             <div className="container">
                 <h1>Slidle #{wordId} <IoMdRefresh className="refreshIcon" onClick={ResetBoard} /></h1>
-                {/* <p>The word is {words[wordId].toUpperCase()}</p> */}
+                <p>The word is {words[wordId].toUpperCase()}</p>
                 <div className="scoreContainer">
                     <p>Score (lower is better):&nbsp;</p>
                     <strong style={{ "width": score.toString().length + "ch" }}>{score}</strong>
@@ -111,7 +112,7 @@ const HomePage = () => {
                     </div>
                 }
             </div>
-            <Keyboard IterateLetter={IterateLetter} />
+            {/* <Keyboard IterateLetter={IterateLetter} /> */}
         </div>
     );
 }

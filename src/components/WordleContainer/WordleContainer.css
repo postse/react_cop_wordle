@@ -1,29 +1,91 @@
 .wordleBoxes {
-    display: flex;
-    flex-direction: row-reverse;
-    /* grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(6, 1fr); */
+    /* display: flex;
+    flex-direction: row-reverse; */
+    display: grid;
+    column-gap: 1rem;
+    row-gap: 1rem;
 }
 
-/* /* .box6 {
-    grid-row: 2/1;
-} */
+.box1 {
+    order: 5;
+}
 
-/* .box7 {
-    grid-row: 3/1;
+.box2 {
+    order: 4;
+}
+
+.box3 {
+    order: 3;
+}
+
+.box4 {
+    order: 2;
+}
+
+.box5 {
+    order: 1;
+}
+
+.box6 {
+    order: 6;
+    grid-row: 2;
+}
+
+.box7 {
+    order: 7;
+    grid-row: 3;
 }
 
 .box8 {
-    grid-row: 4/1;
+    order: 8;
+    grid-row: 3;
 }
 
 .box9 {
-    grid-row: 5/1;
+    order: 9;
+    grid-row: 3;
 }
 
 .box10 {
-    grid-row: 6/1;
-} */ 
+    order: 10;
+    grid-row: 3;
+}
+
+.box11 {
+    order: 11;
+    grid-row: 3;
+}
+
+.box12 {
+    order: 12;
+    grid-row: 4;
+    grid-column: 5;
+}
+
+.box13 {
+    order: 17;
+    grid-row: 5;
+}
+
+.box14 {
+    order: 16;
+    grid-row: 5;
+}
+
+.box15 {
+    order: 15;
+    grid-row: 5;
+}
+
+.box16 {
+    order: 14;
+    grid-row: 5;
+}
+
+.box17 {
+    order: 13;
+    grid-row: 5;
+}
 
 @keyframes fadeIn {
     0% {
