@@ -23,6 +23,7 @@
 
 .simple-keyboard.myTheme1 .hg-button {
     height: 3.5rem;
+    width: clamp(34.5px, 39px, 39px);
     font-size: 1.3rem;
     display: flex;
     justify-content: center;
