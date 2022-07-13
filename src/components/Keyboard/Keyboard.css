@@ -13,6 +13,7 @@
 
 .react-simple-keyboard {
     width: min(100%, 400px) !important;
+    margin-bottom: .5rem;
 }
 
 .simple-keyboard.myTheme1 {
