@@ -83,7 +83,7 @@ const HomePage = () => {
         <div className="fullScreen" tabIndex={0} onKeyUp={(e) => IterateLetter(e.key.toUpperCase())}>
             <div className="container">
                 <h1>Slidle #{wordId} <IoMdRefresh className="refreshIcon" onClick={ResetBoard} /></h1>
-                <p>The word is {words[wordId].toUpperCase()}</p>
+                {/* <p>The word is {words[wordId].toUpperCase()}</p> */}
                 <div className="scoreContainer">
                     <p>Score (lower is better):&nbsp;</p>
                     <strong style={{ "width": score.toString().length + "ch" }}>{score}</strong>
@@ -91,7 +91,7 @@ const HomePage = () => {
                 <WordleContainer word={words[wordId].toUpperCase()} lettersTyped={lettersTyped}></WordleContainer>
                 {
                     hasWon &&
-                    <WinModal startTime={startTime} endTime={endTime} lettersTyped={lettersTyped} score={score}/>
+                    <WinModal startTime={startTime} endTime={endTime} lettersTyped={lettersTyped} score={score} ResetBoard={ResetBoard}/>
                     // <div className="winContainer">
                     //     <h2>You win!</h2>
                     //     <p>Score: <strong>{score}</strong></p>
