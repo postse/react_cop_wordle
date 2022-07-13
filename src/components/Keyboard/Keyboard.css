@@ -1,0 +1,39 @@
+#keyboardContainer {
+    width: 100%;
+    position: absolute;
+    bottom: 5rem;
+}
+
+.react-simple-keyboard {
+    margin-inline: auto;
+    width: min(100%, 800px) !important;
+}
+
+.simple-keyboard.myTheme1 {
+    background-color: hsla(240, 52%, 4%, .3);
+    border-radius: 10px 10px 0px 0px;
+}
+
+.simple-keyboard.myTheme1 .hg-button {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: hsl(240, 52%, 8%);
+    color: hsl(0, 0%, 90%);
+
+    border: 1px solid hsl(0, 0%, 100%, .1);
+    transition: .2s ease;
+}
+
+.simple-keyboard.myTheme1 .hg-button:hover {
+    background-color: hsl(240, 52%, 15%);
+
+    transition: .2s ease;
+}
+
+.simple-keyboard.myTheme1 .hg-button:active {
+    background-color: hsl(240, 52%, 20%);
+
+    transition: .2s ease;
+}

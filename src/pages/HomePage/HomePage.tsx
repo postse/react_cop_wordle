@@ -4,6 +4,7 @@ import words from "../../data/words";
 import JSConfetti from "js-confetti";
 import { IoMdRefresh } from 'react-icons/io'
 import './HomePage.css'
+import Keyboard from "../../components/Keyboard/Keyboard";
 
 const HomePage = () => {
     const [lettersTyped, setLettersTyped] = useState<string[]>(["", "", "", "", "", "", "", "", "", "",]);
@@ -36,10 +37,12 @@ const HomePage = () => {
         window.history.replaceState({ additionalInformation: 'Changed URL to new puzzle' }, "", window.location.origin + "/" + newWordId)
     }
 
-    const IterateLetter = (event: any) => {
+    const IterateLetter = (letter: string) => {
+        letter = letter.toUpperCase();
+
         // checks if the key is a letter
-        if ((/[a-zA-Z]/).test(event.key) && event.key.toUpperCase() !== "BACKSPACE" && event.key.toUpperCase() !== "ENTER") {
-            lettersTyped.push(event.key.toUpperCase());
+        if ((/[a-zA-Z]/).test(letter) && letter !== "BACKSPACE" && letter !== "ENTER") {
+            lettersTyped.push(letter);
             setLettersTyped([...lettersTyped]);
 
             if (hasWon) {
@@ -75,7 +78,7 @@ const HomePage = () => {
     }
 
     return (
-        <div className="fullScreen" tabIndex={0} onKeyUp={IterateLetter}>
+        <div className="fullScreen" tabIndex={0} onKeyUp={(e) => IterateLetter(e.key.toUpperCase())}>
             <div className="container">
                 <h1>Slidle #{wordId} <IoMdRefresh className="refreshIcon" onClick={ResetBoard} /></h1>
                 {/* <p>The word is {words[wordId].toUpperCase()}</p> */}
@@ -108,6 +111,7 @@ const HomePage = () => {
                     </div>
                 }
             </div>
+            <Keyboard IterateLetter={IterateLetter} />
         </div>
     );
 }
