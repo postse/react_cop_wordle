@@ -17,7 +17,7 @@
 }
 
 .simple-keyboard.myTheme1 {
-    background-color: hsla(240, 52%, 4%, .3);
+    background-color: hsla(240, 52%, 4%, 0);
     border-radius: 10px 10px 0px 0px;
 }
 
@@ -44,4 +44,9 @@
     background-color: hsl(240, 52%, 50%);
 
     transition: .2s ease;
+}
+
+.hidden {
+    opacity: 0;
+    display: none;
 }
