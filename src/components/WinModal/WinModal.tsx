@@ -10,8 +10,8 @@ interface winStats {
 
 const WinModal = ({ score, lettersTyped, ResetBoard, totalTime }: winStats) => {
     return (
-        <div id="winModalContainer" onClick={ResetBoard}>
-            <div id="winContainer" onClick={e => e.stopPropagation()}>
+        <div id="winModalContainer" onPointerDown={ResetBoard}>
+            <div id="winContainer" onPointerDown={e => e.stopPropagation()}>
                 <AiOutlineClose id='closeWinButton' onClick={ResetBoard}/>
                 <h2>You win!</h2>
                 <p>Score: <strong>{score}</strong></p>
