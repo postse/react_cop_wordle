@@ -110,7 +110,7 @@ const HomePage = () => {
                     </div>
                     <FiSettings className="icon" onClick={() => setChangingSettings(true)} />
                 </div>
-                <p>The word is {words[wordId].toUpperCase()}</p>
+                {/* <p>The word is {words[wordId].toUpperCase()}</p> */}
                 {/* <select name="gameMode" id="gameMode" onChange={e => setGameMode(e.target.value)} disabled={lettersTyped.length > 17}>
                     <option value={GameMode.Normal}>Normal</option>
                     <option value={GameMode.Hard}>Hard</option>
