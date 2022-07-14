@@ -1,0 +1,58 @@
+#settingsModalContainer {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: brightness(.4);
+}
+
+#settingsContainer {
+    position: relative;
+    width: min(300px, 100%);
+    padding: 2rem;
+    margin-top: 2rem;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    background-color: hsl(240, 52%, 13%);
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+#settingsContainer h2 {
+    margin-top: 0;
+}
+
+#settingsContainer h3 {
+    margin: 0;
+}
+
+#settingsContainer p {
+    margin-top: .2rem;
+}
+
+.shareButton:hover {
+    filter: brightness(.8);
+    transition: .2s ease;
+}
+
+#closeWinButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+#closeWinButton {
+    cursor: pointer;
+}

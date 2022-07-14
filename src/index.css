@@ -43,3 +43,17 @@ code {
 .fullScreen:focus {
   outline: none;
 }
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.marginTop {
+  margin-top: 1rem;
+}
+
+.marginBottom {
+  margin-bottom: 1rem;
+}

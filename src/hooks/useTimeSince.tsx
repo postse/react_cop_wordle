@@ -11,6 +11,11 @@ const useTimeSince = (hasWon: boolean) => {
         }, 250)
     }
 
+    const clearTimer = () => {
+        setTimeSinceStart(0);
+        if (interval.current) clearInterval(interval.current);
+    }
+
     useEffect(() => {
         return () => {
             if (interval.current) clearInterval(interval.current);
@@ -25,7 +30,7 @@ const useTimeSince = (hasWon: boolean) => {
         }
     }, [hasWon])
 
-    return { startTimer, timeSinceStart };
+    return { startTimer, timeSinceStart, clearTimer };
 }
 
 export default useTimeSince;
