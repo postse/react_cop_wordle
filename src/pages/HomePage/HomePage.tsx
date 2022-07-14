@@ -42,6 +42,7 @@ const HomePage = () => {
         setLettersTyped(Array(17).fill(""));
         setHasWon(false);
         clearTimer();
+        if (interval.current) clearInterval(interval.current);
         const newWordId = Math.floor(Math.random() * words.length);
         setWordId(newWordId);
 
