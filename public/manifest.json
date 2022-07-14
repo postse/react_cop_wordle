@@ -3,14 +3,19 @@
   "name": "Slidle",
   "icons": [
     {
-      "src": "icon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "src": "icon48.ico",
+      "sizes": "48x48 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "icon.png",
+      "src": "icon192.png",
+      "sizes": "192x192 128x128 64x64",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "icon512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "any"
     }
   ],
   "start_url": ".",
