@@ -10,12 +10,13 @@
     {
       "src": "icon192.png",
       "sizes": "192x192 128x128 64x64",
-      "type": "image/x-icon"
+      "type": "image/x-icon",
+      "purpose": "maskable"
     },
     {
       "src": "icon512.png",
       "type": "image/png",
-      "sizes": "any"
+      "sizes": "512x512 any"
     }
   ],
   "start_url": ".",
