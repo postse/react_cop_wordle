@@ -111,7 +111,7 @@ const HomePage = () => {
                 }
                 {
                     changingSettings &&
-                    <SettingsModal setChangingSettings={setChangingSettings} gameMode={gameMode} setGameMode={setGameMode} />
+                    <SettingsModal setChangingSettings={setChangingSettings} gameMode={gameMode} setGameMode={setGameMode} currentlyPlaying={lettersTyped.length > 17}/>
                 }
                 <Keyboard IterateLetter={iterateLetter} />
             </div>
