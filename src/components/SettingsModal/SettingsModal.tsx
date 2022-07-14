@@ -17,21 +17,21 @@ const WinModal = ({ setChangingSettings, gameMode, setGameMode }: settings) => {
         <div id="settingsModalContainer" onClick={() => setChangingSettings(false)}>
             <div id="settingsContainer" onClick={e => e.stopPropagation()}>
                 <AiOutlineClose id='closeWinButton' onClick={() => setChangingSettings(false)} />
-                <h2>How to play</h2>
-                <label>
+                <h2>Game Modes</h2>
+                <hr className='fullWidth'/>
+                <label className='blurb'>
                     <div className="flexRow">
                         <h3>Normal Mode</h3>
                         <input type="radio" name="gameMode" id="normalMode" onChange={() => setGameMode(gameModeType.Normal)} checked={gameMode === gameModeType.Normal}/>
                     </div>
                     <p>Find the five letter word that goes in the first five spots to win!</p>
                 </label>
-                <br />
-                <label>
+                <label className='blurb'>
                     <div className="flexRow">
                         <h3>Hard Mode</h3>
                         <input type="radio" name="gameMode" id="hardMode" onChange={() => setGameMode(gameModeType.Hard)} checked={gameMode === gameModeType.Hard}/>
                     </div>
-                    <p>Don't take too long to decide on a letter! If you do, empty spaces will be automatically input.</p>
+                    <p>Same as normal mode, except don't take too long to decide on a letter! If you do, empty spaces will be automatically input.</p>
                 </label>
             </div>
         </div>
