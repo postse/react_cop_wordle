@@ -15,9 +15,24 @@ enum gameModeType {
     Hard
 }
 
+const generateIdFromSeed = (seed: number) => {
+    var mask = 0xffffffff;
+    var m_w = (123456789 + seed) & mask;
+    var m_z = (987654321 - seed) & mask;
+
+    m_z = (36969 * (m_z & 65535) + (m_z >>> 16)) & mask;
+    m_w = (18000 * (m_w & 65535) + (m_w >>> 16)) & mask;
+
+    var result = ((m_z << 16) + (m_w & 65535)) >>> 0;
+    result /= 4294967296;
+    return result;
+}
+
 const HomePage = () => {
     const [lettersTyped, setLettersTyped] = useState<string[]>(Array(17).fill(""));
-    const [wordId, setWordId] = useState<number>(Math.floor(Math.random() * words.length));
+    const date = new Date();
+    const dailyWordId = Math.floor(generateIdFromSeed(date.getFullYear() + date.getMonth() + date.getDay()) * words.length);
+    const [wordId, setWordId] = useState<number>(/^-?\d+$/.test(window.location.pathname.replace("/", "")) ? Number(window.location.pathname.replace("/", "")) : dailyWordId);
     const [hasWon, setHasWon] = useState<boolean>(false);
     const [changingSettings, setChangingSettings] = useState<boolean>(false);
     const [gameMode, setGameMode] = useState<gameModeType>(gameModeType.Normal);
@@ -30,7 +45,7 @@ const HomePage = () => {
         if (/^-?\d+$/.test(window.location.pathname.replace("/", ""))) {
             setWordId(Number(window.location.pathname.replace("/", "")));
         } else {
-            window.location.pathname = "/" + wordId;
+            window.location.pathname = "/" + dailyWordId;
         }
     }, [wordId])
 
@@ -90,28 +105,29 @@ const HomePage = () => {
             <div className="container">
                 <div id="header">
                     <div className="flexRow">
-                        <h1>Slidle #{wordId}</h1>
+                        <h1>Slidle</h1>
                         <IoMdRefresh className="icon" onClick={resetBoard} title="New Puzzle" />
                     </div>
-                    <FiSettings className="icon" onClick={() => setChangingSettings(true)}/>
+                    <FiSettings className="icon" onClick={() => setChangingSettings(true)} />
                 </div>
-                {/* <p>The word is {words[wordId].toUpperCase()}</p> */}
+                <p>The word is {words[wordId].toUpperCase()}</p>
                 {/* <select name="gameMode" id="gameMode" onChange={e => setGameMode(e.target.value)} disabled={lettersTyped.length > 17}>
                     <option value={GameMode.Normal}>Normal</option>
                     <option value={GameMode.Hard}>Hard</option>
                 </select> */}
+                <p>{`${wordId === dailyWordId ? "Daily" : "Random"} Puzzle `}<strong>#{wordId}</strong></p>
                 <div className="scoreContainer">
                     <p>Score (lower is better):&nbsp;</p>
-                    <strong style={{ "width": getScore().toString().length + "ch" }}>{getScore()}</strong>
+                    <strong>{getScore()}</strong>
                 </div>
                 <WordleContainer word={words[wordId].toUpperCase()} lettersTyped={lettersTyped}></WordleContainer>
                 {
                     hasWon &&
-                    <WinModal lettersTyped={lettersTyped} score={getScore()} ResetBoard={resetBoard} totalTime={timeSinceStart} />
+                    <WinModal lettersTyped={lettersTyped} score={getScore()} ResetBoard={resetBoard} totalTime={timeSinceStart} isDailyPuzzle={dailyWordId === wordId} wordId={wordId}/>
                 }
                 {
                     changingSettings &&
-                    <SettingsModal setChangingSettings={setChangingSettings} gameMode={gameMode} setGameMode={setGameMode} currentlyPlaying={lettersTyped.length > 17}/>
+                    <SettingsModal setChangingSettings={setChangingSettings} gameMode={gameMode} setGameMode={setGameMode} currentlyPlaying={lettersTyped.length > 17} />
                 }
                 <Keyboard IterateLetter={iterateLetter} />
             </div>

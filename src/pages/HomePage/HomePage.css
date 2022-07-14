@@ -14,8 +14,8 @@ p {
 }
 
 .scoreContainer {
-    margin-top: .5rem;
-    margin-bottom: 2rem;
+    /* margin-top: .5rem; */
+    margin-bottom: 1rem;
 
     display: flex;
     flex-direction: row;
@@ -27,6 +27,7 @@ p {
     width: 2rem;
     margin-left: .5rem;
     transition: .2s ease;
+    user-select: none;
 }
 
 .icon:hover {

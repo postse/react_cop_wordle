@@ -5,10 +5,12 @@ interface winStats {
     score: number,
     lettersTyped: string[],
     ResetBoard: () => void,
-    totalTime: number
+    totalTime: number,
+    isDailyPuzzle: boolean,
+    wordId: number
 }
 
-const WinModal = ({ score, lettersTyped, ResetBoard, totalTime }: winStats) => {
+const WinModal = ({ score, lettersTyped, ResetBoard, totalTime, isDailyPuzzle, wordId }: winStats) => {
     return (
         <div id="winModalContainer" onPointerDown={ResetBoard}>
             <div id="winContainer" onPointerDown={e => e.stopPropagation()}>
@@ -28,7 +30,7 @@ const WinModal = ({ score, lettersTyped, ResetBoard, totalTime }: winStats) => {
                             button.innerText = "Share results!"
                         }, 2000)
 
-                        navigator.clipboard.writeText(`Slidle Game Results!\nScore (lower is better): ${score}\nLetters typed: ${lettersTyped.length - 10}\nElapsed time: ${Math.round(totalTime)} seconds\nPlay this puzzle: ${window.location.href}`)
+                        navigator.clipboard.writeText(`${isDailyPuzzle ? "Daily" : "Random"} Slidle Game #${wordId} Results!\nScore (lower is better): ${score}\nLetters typed: ${lettersTyped.length - 10}\nElapsed time: ${Math.round(totalTime)} seconds\nPlay this puzzle: ${window.location.href}`)
                     }}>Copy results</button>
             </div>
         </div>

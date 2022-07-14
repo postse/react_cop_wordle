@@ -54,6 +54,10 @@ code {
   align-items: center;
 }
 
+.spaceBetween {
+  justify-content: space-between;
+}
+
 .marginTop {
   margin-top: 1rem;
 }
