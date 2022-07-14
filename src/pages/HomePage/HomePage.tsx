@@ -47,7 +47,7 @@ const HomePage = () => {
         } else {
             window.location.pathname = "/" + dailyWordId;
         }
-    }, [wordId])
+    }, [wordId, dailyWordId])
 
     const getScore = () => {
         return Math.round(timeSinceStart * 4 + (lettersTyped.length - 17) * 10);
