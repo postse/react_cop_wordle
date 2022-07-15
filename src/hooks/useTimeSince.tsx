@@ -1,18 +1,27 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useReducer, useRef } from "react";
 
 const useTimeSince = (hasWon: boolean) => {
-    const [timeSinceStart, setTimeSinceStart] = useState(0);
+    const [timeSinceStart, updateTime] = useReducer((state: number, action: string) => {
+        switch (action) {
+            case 'reset':
+                return 0;
+            case 'add': 
+                return state + .25;
+            default:
+                return state;
+        }
+    }, 0);
     const interval = useRef<NodeJS.Timeout | null>(null);
 
     const startTimer = () => {
-        setTimeSinceStart(0);
+        updateTime("reset");
         interval.current = setInterval(() => {
-            setTimeSinceStart(timeSinceStart => timeSinceStart + .25);
+            updateTime("add");
         }, 250)
     }
 
     const clearTimer = () => {
-        setTimeSinceStart(0);
+        updateTime("reset");
         if (interval.current) clearInterval(interval.current);
     }
 
@@ -26,7 +35,7 @@ const useTimeSince = (hasWon: boolean) => {
         if (hasWon) {
             if (interval.current) clearInterval(interval.current);
         } else {
-            setTimeSinceStart(0);
+            updateTime("reset");
         }
     }, [hasWon])
 
