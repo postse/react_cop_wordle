@@ -27,13 +27,13 @@ code {
 }
 
 .container {
-  /* width: min(90%, 1200px); */
+  width: min(95%, 1200px);
 
   /* margin-top: 1rem; */
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
 }
 
