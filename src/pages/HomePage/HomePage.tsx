@@ -103,32 +103,30 @@ const HomePage = () => {
     return (
         <div className="fullScreen" tabIndex={0} onKeyUp={(e) => iterateLetter(e.key.toUpperCase())}>
             <div className="container">
-                <div id="header">
-                    <div className="flexRow">
-                        <h1>Slidle</h1>
-                        <IoMdRefresh className="icon" onClick={resetBoard} title="New Puzzle" />
+                <div>
+                    <div id="header">
+                        <div className="flexRow">
+                            <h1 className="pointer" onClick={() => window.location.pathname = "/" + dailyWordId} tabIndex={0}>Slidle</h1>
+                            <IoMdRefresh className="icon" onClick={resetBoard} title="New Puzzle" role="button" tabIndex={0}/>
+                        </div>
+                        <FiSettings className="icon" onClick={() => setChangingSettings(true)} role="button" tabIndex={0}/>
                     </div>
-                    <FiSettings className="icon" onClick={() => setChangingSettings(true)} />
+                    {/* <p>The word is {words[wordId].toUpperCase()}</p> */}
+                    <p>{`${wordId === dailyWordId ? "Daily" : "Random"} Puzzle `}<strong>#{wordId}</strong></p>
+                    <div className="scoreContainer">
+                        <p>Score (lower is better):&nbsp;</p>
+                        <strong>{getScore()}</strong>
+                    </div>
+                    <WordleContainer word={words[wordId].toUpperCase()} lettersTyped={lettersTyped}></WordleContainer>
+                    {
+                        hasWon &&
+                        <WinModal lettersTyped={lettersTyped} score={getScore()} ResetBoard={resetBoard} totalTime={timeSinceStart} isDailyPuzzle={dailyWordId === wordId} wordId={wordId} />
+                    }
+                    {
+                        changingSettings &&
+                        <SettingsModal setChangingSettings={setChangingSettings} gameMode={gameMode} setGameMode={setGameMode} currentlyPlaying={lettersTyped.length > 17} />
+                    }
                 </div>
-                {/* <p>The word is {words[wordId].toUpperCase()}</p> */}
-                {/* <select name="gameMode" id="gameMode" onChange={e => setGameMode(e.target.value)} disabled={lettersTyped.length > 17}>
-                    <option value={GameMode.Normal}>Normal</option>
-                    <option value={GameMode.Hard}>Hard</option>
-                </select> */}
-                <p>{`${wordId === dailyWordId ? "Daily" : "Random"} Puzzle `}<strong>#{wordId}</strong></p>
-                <div className="scoreContainer">
-                    <p>Score (lower is better):&nbsp;</p>
-                    <strong>{getScore()}</strong>
-                </div>
-                <WordleContainer word={words[wordId].toUpperCase()} lettersTyped={lettersTyped}></WordleContainer>
-                {
-                    hasWon &&
-                    <WinModal lettersTyped={lettersTyped} score={getScore()} ResetBoard={resetBoard} totalTime={timeSinceStart} isDailyPuzzle={dailyWordId === wordId} wordId={wordId}/>
-                }
-                {
-                    changingSettings &&
-                    <SettingsModal setChangingSettings={setChangingSettings} gameMode={gameMode} setGameMode={setGameMode} currentlyPlaying={lettersTyped.length > 17} />
-                }
                 <Keyboard IterateLetter={iterateLetter} />
             </div>
         </div>
