@@ -32,7 +32,7 @@ const HomePage = () => {
     const [lettersTyped, setLettersTyped] = useState<string[]>(Array(17).fill(""));
     const date = new Date();
     const dailyWordId = Math.floor(generateIdFromSeed(date.getFullYear() + date.getMonth() + date.getDay()) * words.length);
-    const [wordId, setWordId] = useState<number>(/^-?\d+$/.test(window.location.pathname.replace("/", "")) ? Number(window.location.pathname.replace("/", "")) : dailyWordId);
+    const [wordId, setWordId] = useState<number>(/^-?\d+$/.test(window.location.pathname.replace("/", "")) ? Math.abs(Math.min(Number(window.location.pathname.replace("/", "")), words.length - 1)) : dailyWordId);
     const [hasWon, setHasWon] = useState<boolean>(false);
     const [changingSettings, setChangingSettings] = useState<boolean>(false);
     const [gameMode, setGameMode] = useState<gameModeType>(gameModeType.Normal);
@@ -43,7 +43,7 @@ const HomePage = () => {
 
     useEffect(() => {
         if (/^-?\d+$/.test(window.location.pathname.replace("/", ""))) {
-            setWordId(Number(window.location.pathname.replace("/", "")));
+            setWordId(Math.abs(Math.min(Number(window.location.pathname.replace("/", "")), words.length - 1)));
         } else {
             window.location.pathname = "/" + dailyWordId;
         }
