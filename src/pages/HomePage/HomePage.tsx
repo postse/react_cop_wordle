@@ -1,14 +1,20 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import WordleContainer from "../../components/WordleContainer/WordleContainer";
 import words from "../../data/words";
 import JSConfetti from "js-confetti";
-import { IoMdRefresh } from 'react-icons/io'
-import { FiSettings } from 'react-icons/fi'
-import './HomePage.css'
+import { IoMdRefresh } from 'react-icons/io';
+import { FiSettings } from 'react-icons/fi';
+import { VscMute, VscUnmute } from 'react-icons/vsc'
+import './HomePage.css';
 import Keyboard from "../../components/Keyboard/Keyboard";
 import WinModal from "../../components/WinModal/WinModal";
 import useTimeSince from "../../hooks/useTimeSince";
-import SettingsModal from '../../components/SettingsModal/SettingsModal'
+import SettingsModal from '../../components/SettingsModal/SettingsModal';
+import useSound from "use-sound";
+
+const clickNoise = require("../../data/click.mp3");
+const winNoise = require("../../data/win.mp3")
+const music = require("../../data/music.mp3");
 
 enum gameModeType {
     Normal,
@@ -41,6 +47,22 @@ const HomePage = () => {
 
     const jsConfetti = new JSConfetti();
 
+    const [volumeOn, setVolumeOn] = useState<boolean>(false);
+    const [playClickNoise] = useSound(clickNoise, {
+        volume: volumeOn ? 1 : 0,
+        interrupt: true,
+    });
+    const [playWinNoise] = useSound(winNoise, {
+        volume: volumeOn ? 1 : 0,
+        interrupt: true
+    })
+    const [musicSpeed, setMusicSpeed] = useState<number>(1);
+    const [playMusic, { sound }] = useSound(music, {
+        volume: volumeOn ? .6 : 0,
+        playbackRate: musicSpeed,
+        interrupt: true,
+    });
+
     useEffect(() => {
         if (/^-?\d+$/.test(window.location.pathname.replace("/", ""))) {
             setWordId(Math.abs(Math.min(Number(window.location.pathname.replace("/", "")), words.length - 1)));
@@ -54,6 +76,11 @@ const HomePage = () => {
     }
 
     const resetBoard = () => {
+        if (!sound.playing()) {
+            setMusicSpeed(1);
+            playMusic();
+            sound.fade(0, .6, 1000);
+        }
         setLettersTyped(Array(17).fill(""));
         setHasWon(false);
         clearTimer();
@@ -64,6 +91,15 @@ const HomePage = () => {
         window.history.replaceState({ additionalInformation: 'Changed URL to new puzzle' }, "", window.location.origin + "/" + newWordId)
     }
 
+    useEffect(() => {
+        if (!sound) return;
+        sound.loop(true);
+        if (volumeOn) {
+            playMusic();
+            sound.fade(0, volumeOn ? .6 : 0, 1000)
+        }
+    }, [sound])
+
     const iterateLetter = (letter: string) => {
         letter = letter.toUpperCase();
         if (letter.length > 1) return;
@@ -72,7 +108,10 @@ const HomePage = () => {
         if (letter.match(/^[A-Z]*$/)) {
             lettersTyped.push(letter);
             setLettersTyped([...lettersTyped]);
+            playClickNoise();
+            setMusicSpeed(musicSpeed => Math.min(musicSpeed + .02, 1.7));
 
+            // AKA if you are on win screen and wanna reset the board
             if (hasWon) {
                 resetBoard();
                 return;
@@ -81,9 +120,12 @@ const HomePage = () => {
             if (interval.current) {
                 clearInterval(interval.current);
             }
+            // win condition
             if (lettersTyped.slice(lettersTyped.length - 5, lettersTyped.length).join("") === words[wordId].toUpperCase()) {
+                playWinNoise();
                 jsConfetti.addConfetti();
                 setHasWon(true);
+                sound.stop();
             } else {
                 if (gameMode === gameModeType.Hard) {
                     interval.current = setInterval(() => {
@@ -107,11 +149,25 @@ const HomePage = () => {
                     <div id="header">
                         <div className="flexRow">
                             <h1 className="pointer" onClick={() => window.location.pathname = "/" + dailyWordId} tabIndex={0}>Slidle</h1>
-                            <IoMdRefresh className="icon" onClick={resetBoard} title="New Puzzle" role="button" tabIndex={0}/>
+                            <IoMdRefresh className="icon" onClick={resetBoard} title="New Puzzle" role="button" tabIndex={0} />
                         </div>
-                        <FiSettings className="icon" onClick={() => setChangingSettings(true)} role="button" tabIndex={0}/>
+                        <div className="flexRow alignCenter">
+                            {
+                                (volumeOn &&
+                                    <VscUnmute className="icon marginRightSmall" onClick={() => {
+                                        setVolumeOn(false);
+                                        sound.pause();
+                                    }} />) ||
+                                <VscMute className="icon marginRightSmall" onClick={() => {
+                                    setVolumeOn(true);
+                                    sound.play();
+                                    sound.fade(0, .6, 1000)
+                                }} />
+                            }
+                            <FiSettings className="icon" onClick={() => setChangingSettings(true)} role="button" tabIndex={0} />
+                        </div>
                     </div>
-                    {/* <p>The word is {words[wordId].toUpperCase()}</p> */}
+                    <p>The word is {words[wordId].toUpperCase()}</p>
                     <p>{`${wordId === dailyWordId ? "Daily" : "Random"} Puzzle `}<strong>#{wordId}</strong></p>
                     <div className="scoreContainer">
                         <p>Score (lower is better):&nbsp;</p>

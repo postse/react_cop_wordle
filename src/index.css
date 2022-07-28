@@ -67,6 +67,10 @@ code {
   margin-bottom: 1rem;
 }
 
+.marginRightSmall {
+  margin-right: .5rem;
+}
+
 .pointer {
   cursor: pointer;
 }
